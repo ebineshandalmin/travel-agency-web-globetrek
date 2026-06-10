@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users | GlobeTrek Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card-user {
+            background: #FFF0F5;
+            border-left: 4px solid #F9A8D4;
+        }
+
+        /* customer */
+        .card-staff {
+            background: #F0F9FF;
+            border-left: 4px solid #BAE6FD;
+        }
+
+        /* staff */
+        .card-admin {
+            background: #ECFDF5;
+            border-left: 4px solid #6EE7B7;
+        }
+
+        /* admin */
+    </style>
+</head>
+
+<body class="font-[Inter] bg-gray-50 min-h-screen flex">
+
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Admin Console</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/admin.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/admin-packages.html" class="nav-link"><i class="fas fa-box w-5"></i> Manage Packages</a>
+            <a href="/html/admin-booking.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> Manage
+                Bookings</a>
+            <a href="/html/admin-user.html" class="nav-link active"><i class="fas fa-users w-5"></i> Manage Users</a>
+            <a href="/html/admin-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Customer
+                Queries</a>
+            <a href="/html/admin-reports.html" class="nav-link"><i class="fas fa-chart-line w-5"></i> Reports</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <a href="/html/admin-settings.html" class="nav-link text-gray-600"><i class="fas fa-cog w-5"></i>
+                Settings</a>
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i
+                    class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 serif-heading">Manage Users</h2>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 border-l pl-6">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800" id="adminName">Admin</p>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Head Administrator</p>
+                    </div>
+                    <i class="fas fa-user-shield text-3xl text-teal-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- User cards grid -->
+        <div id="usersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- dynamically filled -->
+        </div>
+    </main>
+
+    <script type="module" src="/script/admin-user.js"></script>
+</body>
+
+</html>

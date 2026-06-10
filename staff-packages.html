@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Packages | GlobeTrek Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/staff.css">
+    <link rel="stylesheet" href="/style/manage-packages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        .serif-heading { font-family: 'Playfair Display', serif; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-content { animation: modalIn 0.2s ease-out; }
+    </style>
+</head>
+<body class="font-[Inter] bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Staff Portal</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/staff.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/staff-packages.html" class="nav-link active"><i class="fas fa-box w-5"></i> Manage Packages</a>
+            <a href="/html/staff-locations.html" class="nav-link"><i class="fas fa-map-pin w-5"></i> Manage Locations</a>
+            <a href="/html/staff-booking.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> Manage Bookings</a>
+            <a href="/html/staff-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Customer Queries</a>
+            <a href="/html/staff-profile.html" class="nav-link"><i class="fas fa-user-circle w-5"></i> Profile</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 serif-heading">Manage Packages</h2>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 border-l pl-6">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800" id="staffName">Staff</p>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Staff Portal</p>
+                    </div>
+                    <i class="fas fa-user-shield text-3xl text-green-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <button id="openAddModalBtn" class="btn-gradient text-white px-5 py-3 rounded-xl font-semibold text-sm transition shadow-md mb-6">
+            <i class="fas fa-plus mr-2"></i> Add New Package
+        </button>
+
+        <!-- Loading / Error -->
+        <div id="loadingIndicator" class="text-center py-12 text-gray-500">
+            <i class="fas fa-spinner fa-spin text-3xl mb-2"></i>
+            <p>Loading packages...</p>
+        </div>
+        <div id="errorMessage" class="hidden text-center py-12 text-red-500">
+            <i class="fas fa-exclamation-circle text-3xl mb-2"></i>
+            <p>Failed to load packages.</p>
+        </div>
+
+        <div id="packagesContainer" class="hidden bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="text-xs font-semibold uppercase">
+                    <tr>
+                        <th class="p-4">Image</th>
+                        <th class="p-4">Title</th>
+                        <th class="p-4">Destination</th>
+                        <th class="p-4">Price</th>
+                        <th class="p-4">Tag</th>
+                        <th class="p-4 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="packagesTableBody" class="text-sm text-gray-700 divide-y divide-gray-100"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Add/Edit Package Modal -->
+    <div id="packageModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-xl font-bold text-gray-800">Add New Package</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <form id="packageForm" class="space-y-5">
+                <input type="hidden" id="packageId">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                    <input type="text" id="packageTitle" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500" placeholder="e.g., Maldives Overwater Villas">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Destination</label>
+                    <input type="text" id="packageDestination" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500" placeholder="e.g., Maldives">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                    <textarea id="packageDescription" rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500" placeholder="Short description..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Price ($)</label>
+                        <input type="number" id="packagePrice" required min="1" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tag</label>
+                        <select id="packageTag" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                            <option value="Adventure">Adventure</option>
+                            <option value="Beach">Beach</option>
+                            <option value="City Life">City Life</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Romantic">Romantic</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Historic">Historic</option>
+                            <option value="Relaxing">Relaxing</option>
+                            <option value="Modern">Modern</option>
+                            <option value="Festival">Festival</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Image URL</label>
+                    <input type="url" id="packageImage" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500" placeholder="https://images.unsplash.com/...">
+                    <p class="text-xs text-gray-400 mt-1">Provide a direct link to an image (Unsplash, etc.)</p>
+                </div>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" id="cancelModalBtn" class="px-5 py-3 border border-gray-200 rounded-xl text-sm font-semibold hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="btn-gradient text-white px-5 py-3 rounded-xl font-semibold text-sm shadow-md">Save Package</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/script/staff-manage-packages.js"></script>
+</body>
+</html>

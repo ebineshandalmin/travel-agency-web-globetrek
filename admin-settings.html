@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | GlobeTrek Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+
+<body class="font-[Inter] bg-gray-50 min-h-screen flex">
+
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Admin Console</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/admin.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/admin-packages.html" class="nav-link"><i class="fas fa-box w-5"></i> Manage Packages</a>
+            <a href="/html/admin-booking.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> Manage
+                Bookings</a>
+            <a href="/html/admin-user.html" class="nav-link"><i class="fas fa-users w-5"></i> Manage Users</a>
+            <a href="/html/admin-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Customer
+                Queries</a>
+            <a href="/html/admin-reports.html" class="nav-link"><i class="fas fa-chart-line w-5"></i> Reports</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <a href="/html/admin-settings.html" class="nav-link active"><i class="fas fa-cog w-5"></i> Settings</a>
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i
+                    class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 serif-heading">Settings</h2>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 border-l pl-6">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800" id="adminName">Admin</p>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Head Administrator</p>
+                    </div>
+                    <i class="fas fa-user-shield text-3xl text-teal-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Profile Details -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Profile Details</h3>
+                <form id="profileForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="fullName"
+                            class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="phone"
+                            class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" disabled
+                            class="w-full px-4 py-2 border border-gray-200 rounded-xl bg-gray-50 text-gray-500">
+                    </div>
+                    <button type="submit" class="btn-gradient text-white px-6 py-3 rounded-xl font-semibold text-sm">
+                        <i class="fas fa-save mr-2"></i> Save Changes
+                    </button>
+                </form>
+                <div id="profileMsg" class="mt-4 text-sm font-semibold"></div>
+            </div>
+
+            <!-- Security -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Change Password</h3>
+                <form id="passwordForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                        <input type="password" id="newPassword" required
+                            class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <button type="submit" class="btn-gradient text-white px-6 py-3 rounded-xl font-semibold text-sm">
+                        <i class="fas fa-lock mr-2"></i> Update Password
+                    </button>
+                </form>
+                <div id="passwordMsg" class="mt-4 text-sm font-semibold"></div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="/script/admin-settings.js"></script>
+</body>
+
+</html>

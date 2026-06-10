@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Location Details | GlobeTrek Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/staff.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        .serif-heading { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="font-[Inter] bg-gray-50 min-h-screen flex">
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Staff Portal</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/staff.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/staff-packages.html" class="nav-link"><i class="fas fa-box w-5"></i> Manage Packages</a>
+            <a href="/html/staff-locations.html" class="nav-link active"><i class="fas fa-map-pin w-5"></i> Manage Locations</a>
+            <a href="/html/staff-booking.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> Manage Bookings</a>
+            <a href="/html/staff-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Customer Queries</a>
+            <a href="/html/staff-profile.html" class="nav-link"><i class="fas fa-user-circle w-5"></i> Profile</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 serif-heading">Manage Location Details</h2>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 border-l pl-6">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800" id="staffName">Staff</p>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Staff Portal</p>
+                    </div>
+                    <i class="fas fa-user-shield text-3xl text-green-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <button id="openAddModalBtn"
+            class="btn-gradient text-white px-5 py-3 rounded-xl font-semibold text-sm transition shadow-md mb-6">
+            <i class="fas fa-plus mr-2"></i> Add New Location
+        </button>
+
+        <!-- Loading / Error / Card grid -->
+        <div id="loadingIndicator" class="text-center py-12 text-gray-500">
+            <i class="fas fa-spinner fa-spin text-3xl mb-2"></i>
+            <p>Loading locations...</p>
+        </div>
+        <div id="errorMessage" class="hidden text-center py-12 text-red-500">
+            <i class="fas fa-exclamation-circle text-3xl mb-2"></i>
+            <p>Failed to load locations.</p>
+        </div>
+
+        <div id="locationsContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <!-- ========== ADD / EDIT LOCATION MODAL (spacious, full form) ========== -->
+    <div id="locationModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+        <!-- WIDER CARD (max-w-5xl, no scroll) -->
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl p-8 max-h-[95vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-800">Add New Location</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-xl"></i></button>
+            </div>
+
+            <!-- FORM – fields arranged in 2 columns when possible -->
+            <form id="locationForm" class="space-y-5">
+                <input type="hidden" id="locationKey">
+
+                <!-- Package / Destination + Country (side by side) -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-box mr-1 text-teal-600"></i>Package / Destination *
+                        </label>
+                        <select id="destinationSelect"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500" required>
+                            <option value="">-- Select a package --</option>
+                        </select>
+                        <input type="text" id="customDestName" placeholder="Enter new destination name"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 mt-2 hidden">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Country</label>
+                        <input type="text" id="locCountry"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="e.g., Indonesia">
+                    </div>
+                </div>
+
+                <!-- Short Intro (full width) -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Short Intro</label>
+                    <textarea id="locShortIntro" rows="2"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                        placeholder="1–2 lines about the destination"></textarea>
+                </div>
+
+                <!-- Main Attractions & Activities (2 columns) -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Main Attractions</label>
+                        <div id="attractionsContainer" class="space-y-2">
+                            <input type="text"
+                                class="attraction-input w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                                placeholder="e.g., Uluwatu Temple">
+                        </div>
+                        <button type="button" id="addAttractionBtn" class="mt-2 text-sm text-teal-600 hover:underline">
+                            <i class="fas fa-plus-circle mr-1"></i> Add another
+                        </button>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Activities</label>
+                        <div id="activitiesContainer" class="space-y-2">
+                            <input type="text"
+                                class="activity-input w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                                placeholder="e.g., Surfing">
+                        </div>
+                        <button type="button" id="addActivityBtn" class="mt-2 text-sm text-teal-600 hover:underline">
+                            <i class="fas fa-plus-circle mr-1"></i> Add another
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Best Time & Culture (2 columns) -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Best Time to Visit</label>
+                        <input type="text" id="locBestTime"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="e.g., April to October">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Culture & Experience</label>
+                        <textarea id="locCulture" rows="2"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="Local food, festivals, traditions..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Accessibility & Accommodation (2 columns) -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Accessibility</label>
+                        <input type="text" id="locAccessibility"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="How to reach, local transport">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Accommodation</label>
+                        <input type="text" id="locAccommodation"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="Types of stays available">
+                    </div>
+                </div>
+
+                <!-- Cost/Budget & Travel Tips (2 columns) -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Cost / Budget</label>
+                        <input type="text" id="locCostBudget"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="e.g., $800–$2000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Travel Tips</label>
+                        <textarea id="locTravelTips" rows="2"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="Safety tips, things to carry..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Selling Line & Hero Image (2 columns) -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Selling Line</label>
+                        <input type="text" id="locSellingLine"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="One attractive sentence">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Hero Image URL</label>
+                        <input type="url" id="locImage"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                            placeholder="https://images.unsplash.com/...">
+                    </div>
+                </div>
+
+                <!-- Modal buttons -->
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" id="cancelModalBtn"
+                        class="px-6 py-3 border border-gray-200 rounded-xl text-sm font-semibold hover:bg-gray-50">Cancel</button>
+                    <button type="submit"
+                        class="btn-gradient text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md">
+                        <i class="fas fa-save mr-2"></i> Save Location
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/script/staff-locations.js"></script>
+</body>
+</html>

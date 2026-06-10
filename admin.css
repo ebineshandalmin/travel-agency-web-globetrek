@@ -1,0 +1,137 @@
+/* ========== SIDEBAR NAVIGATION ========== */
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 500;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Active link – gradient background */
+.nav-link.active {
+    background: linear-gradient(135deg, #0F766E, #10B981);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+}
+
+/* ========== STAT CARDS (colourful pastel backgrounds) ========== */
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid #f3f4f6;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Colour variations for stat cards */
+.stat-pink   { background: #FFF0F5; border-color: #F9A8D4; }
+.stat-blue   { background: #F0F9FF; border-color: #BAE6FD; }
+.stat-amber  { background: #FFFBEB; border-color: #FDE68A; }
+.stat-indigo { background: #EEF2FF; border-color: #C7D2FE; }
+
+.stat-icon-pink   { background: #FCE7F3; color: #BE185D; }
+.stat-icon-blue   { background: #DBEAFE; color: #1D4ED8; }
+.stat-icon-amber  { background: #FEF3C7; color: #B45309; }
+.stat-icon-indigo { background: #E0E7FF; color: #3730A3; }
+
+/* ========== STATUS PILLS ========== */
+.status-pill {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-confirmed {
+    background: #DCFCE7;
+    color: #166534;
+}
+
+.status-pending {
+    background: #FFEDD5;
+    color: #9A3412;
+}
+
+.status-cancelled {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+/* ========== TABLES ========== */
+table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+td {
+    padding: 1rem 0.5rem;
+}
+
+/* ========== TABLE HEADERS – PLAIN (no gradient) ========== */
+thead tr {
+    background: white;               /* plain white background */
+    color: #6b7280;                  /* gray text */
+    border-bottom: 2px solid #e5e7eb;
+}
+
+thead th {
+    padding: 12px 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+/* ========== BUTTONS ========== */
+.btn-gradient {
+    background: linear-gradient(135deg, #0F766E, #047857);
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 10px 20px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15, 118, 110, 0.4);
+}
+
+/* ========== EMPTY STATE ========== */
+.empty-state i {
+    font-size: 3rem;
+    color: #d1d5db;
+}
+
+/* ========== SIDEBAR HEADER GRADIENT ========== */
+.sidebar-header {
+    background: linear-gradient(135deg, #0F766E, #047857);
+    color: white;
+}
+
+.sidebar-header h1,
+.sidebar-header p {
+    color: white;
+}
+
+.sidebar-header .fa-compass {
+    color: white;
+}

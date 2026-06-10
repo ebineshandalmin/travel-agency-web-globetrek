@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | GlobeTrek Adventures</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Fonts: Inter + Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Register CSS (unchanged) -->
+    <link rel="stylesheet" href="/style/register.css">
+
+    <style>
+        /* ===================== BASE ===================== */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ===================== BACKGROUND IMAGE ZOOM ===================== */
+        @keyframes slowZoom {
+            0%   { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+        .bg-zoom {
+            animation: slowZoom 20s ease-out forwards;
+        }
+
+        /* ===================== SLIDE UP ANIMATION (form) ===================== */
+        @keyframes slideUpSoft {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+            animation: slideUpSoft 0.7s ease-out forwards;
+        }
+
+        /* ===================== FADE IN DOWN ANIMATION (branding) ===================== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-down {
+            animation: fadeInDown 0.7s ease-out forwards;
+        }
+
+        /* ===================== INPUT FOCUS ===================== */
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.18);
+            border-color: #0f766e !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- ===================== FULL SCREEN WRAPPER ===================== -->
+    <div class="relative min-h-screen w-full overflow-hidden">
+
+        <!-- ===================== BACKGROUND IMAGE ===================== -->
+        <img
+            src="/assets/hero4.jpg"
+            alt="Travel background"
+            class="absolute inset-0 w-full h-full object-cover bg-zoom"
+        >
+
+        <!-- ===================== DARK OVERLAY ===================== -->
+        <div class="absolute inset-0 bg-gradient-to-bl from-black/60 via-black/30 to-black/50"></div>
+
+        <!-- ===================== TOP RIGHT: BRANDING + WELCOME ===================== -->
+        <div class="absolute top-10 right-10 z-20 animate-fade-down text-right">
+
+            <!-- Logo + Name -->
+            <div class="flex items-center justify-end gap-3 mb-6">
+                <span class="text-white font-bold text-2xl tracking-tight">GlobeTrek</span>
+                <div class="w-12 h-12 bg-teal-600/80 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-compass text-white text-2xl"></i>
+                </div>
+            </div>
+
+            <!-- Welcome heading -->
+            <h1 class="serif-heading text-white font-extrabold text-6xl leading-tight drop-shadow-lg">
+                Explore the<br>Uncharted
+            </h1>
+
+            <!-- Tagline -->
+            <p class="text-white/75 text-lg mt-4 max-w-sm ml-auto">
+                Every journey begins with<br>a single click. Join us today.
+            </p>
+        </div>
+
+        <!-- ===================== CENTERED REGISTER FORM ===================== -->
+        <div class="absolute inset-0 flex items-center justify-center z-20 px-4">
+            <div class="w-full max-w-xl animate-slide-up">
+
+                <!-- Form Card -->
+                <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/60">
+
+                    <!-- Form Heading -->
+                    <div class="mb-5">
+                        <h2 class="serif-heading text-3xl font-extrabold text-gray-800 mb-1">Create Account</h2>
+                        <p class="text-gray-500 text-sm">Join the GlobeTrek community</p>
+                    </div>
+
+                    <!-- ===================== REGISTER FORM ===================== -->
+                    <form id="registerForm" class="space-y-4">
+
+                        <!-- Full Name -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+                            <div class="relative">
+                                <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-teal-500"></i>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    required
+                                    placeholder="John Doe"
+                                    class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm transition-all focus:bg-white"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Email address</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-teal-500"></i>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    required
+                                    placeholder="explorer@globetrek.com"
+                                    class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm transition-all focus:bg-white"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+                            <div class="relative">
+                                <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-teal-500"></i>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    required
+                                    placeholder="+1 (555) 000-0000"
+                                    class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm transition-all focus:bg-white"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Password + Confirm Password (side by side) -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Password -->
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+                                <div class="relative">
+                                    <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-teal-500"></i>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        required
+                                        placeholder="••••••••"
+                                        class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm transition-all focus:bg-white"
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Confirm</label>
+                                <div class="relative">
+                                    <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-teal-500"></i>
+                                    <input
+                                        type="password"
+                                        id="confirmPassword"
+                                        required
+                                        placeholder="••••••••"
+                                        class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm transition-all focus:bg-white"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms & Conditions Checkbox -->
+                        <div class="flex items-start">
+                            <input
+                                id="terms"
+                                type="checkbox"
+                                required
+                                class="w-4 h-4 mt-0.5 rounded border-gray-300 text-teal-600 focus:ring-teal-500 accent-teal-600 cursor-pointer"
+                            >
+                            <label for="terms" class="ml-3 text-xs text-gray-500 leading-normal cursor-pointer">
+                                I agree to the
+                                <a href="#" class="text-teal-700 font-semibold hover:underline">Terms of Service</a>
+                                and
+                                <a href="#" class="text-teal-700 font-semibold hover:underline">Privacy Policy</a>.
+                            </label>
+                        </div>
+
+                        <!-- Submit Button (teal theme) -->
+                        <button
+                            type="submit"
+                            id="submitBtn"
+                            class="w-full bg-teal-700 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2"
+                        >
+                            <span>CREATE ACCOUNT</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                        <!-- Status Message -->
+                        <div id="statusMessage" class="hidden text-sm text-center font-medium"></div>
+
+                    </form>
+
+                    <!-- Sign In Link -->
+                    <p class="mt-5 text-center text-gray-500 text-sm">
+                        Already a member?
+                        <a href="/html/login.html" class="text-teal-700 font-semibold hover:underline">Sign in</a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ===================== END FULL SCREEN WRAPPER ===================== -->
+
+    <!-- ===================== REGISTER SCRIPT (unchanged) ===================== -->
+    <script type="module" src="/script/register.js"></script>
+
+</body>
+</html>

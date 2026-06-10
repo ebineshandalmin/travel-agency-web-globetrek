@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlobeTrek Adventures | Explore the World</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="font-[Inter] bg-gray-50">
+    <!-- Navbar -->
+    <header id="navbar"
+        class="fixed w-full z-50 transition-all duration-300 py-4 px-6 lg:px-12 grid grid-cols-3 items-center text-white">
+        <div class="text-2xl font-bold tracking-tight justify-self-start">
+            <i class="fas fa-plane-departure mr-2"></i>GlobeTrek<span class="font-light">Adventures</span>
+        </div>
+
+        <nav class="hidden md:flex space-x-8 font-medium text-sm justify-self-center">
+            <a href="/" class="border-b-2 border-white pb-1">Home</a>
+            <a href="/html/packages.html" class="hover:text-teal-200 transition">Packages</a>
+            <a href="/html/about.html" class="hover:text-teal-200 transition">About</a>
+            <a href="/html/contact.html" class="hover:text-teal-200 transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center space-x-3 justify-self-end">
+            <button id="loginBtn" class="hover:text-teal-200 font-medium text-sm transition">
+                Login
+            </button>
+            <button id="registerBtn"
+                class="bg-white/20 backdrop-blur-sm text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-teal-800 transition">
+                Register
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center text-white">
+        <div class="absolute inset-0 z-0">
+            <img src="/assets/hero2.jpg" class="w-full h-full object-cover brightness-50" alt="Hero" />
+        </div>
+
+        <div class="relative z-10 max-w-4xl px-4">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight hero-title">
+                Explore the World with<br />GlobeTrek Adventures
+            </h1>
+
+            <p class="text-lg md:text-xl mb-10 text-white/90 max-w-2xl mx-auto">
+                Plan, customize, and book your dream trip effortlessly with our expert curators and local guides.
+            </p>
+
+            <div class="relative w-full max-w-3xl mx-auto">
+                <div class="bg-white p-2 rounded-full shadow-2xl flex items-center">
+                    <i class="fas fa-search text-gray-400 ml-4"></i>
+
+                    <input type="text" id="locationSearch" placeholder="Search destinations (e.g. Bali, Japan...)"
+                        class="flex-1 px-4 py-4 outline-none text-gray-700 rounded-full" />
+
+                    <button id="heroSearchBtn"
+                        class="bg-teal-700 hover:bg-teal-800 text-white px-8 py-4 rounded-full font-semibold transition transform hover:scale-105">
+                        Explore Packages
+                    </button>
+                </div>
+
+                <div id="searchResults"
+                    class="absolute w-full bg-white mt-3 rounded-2xl shadow-xl hidden z-50 max-h-80 overflow-y-auto text-left">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="pt-24 pb-12 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="feature-card group">
+            <div
+                class="w-16 h-16 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition">
+                <i class="fas fa-tags text-xl"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Affordable Packages</h3>
+            <p class="text-sm text-gray-500">
+                Curated luxury at prices that respect your travel budget.
+            </p>
+        </div>
+
+        <div class="feature-card group">
+            <div
+                class="w-16 h-16 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition">
+                <i class="fas fa-check-circle text-xl"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Trusted Service</h3>
+            <p class="text-sm text-gray-500">
+                Over 15 years of creating unforgettable memories globally.
+            </p>
+        </div>
+
+        <div class="feature-card group">
+            <div
+                class="w-16 h-16 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition">
+                <i class="fas fa-calendar-alt text-xl"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Easy Booking</h3>
+            <p class="text-sm text-gray-500">
+                Seamless digital experience from planning to boarding.
+            </p>
+        </div>
+
+        <div class="feature-card group">
+            <div
+                class="w-16 h-16 bg-indigo-100 text-indigo-700 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition">
+                <i class="fas fa-headset text-xl"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">24/7 Support</h3>
+            <p class="text-sm text-gray-500">
+                Our travel experts are always just one message away.
+            </p>
+        </div>
+    </section>
+
+    <!-- Curated Collections -->
+    <section class="pt-12 pb-24 px-6 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">
+                    Hand-Picked Experiences
+                </span>
+                <h2 class="text-4xl font-bold mt-2 text-gray-800">
+                    Curated Collections
+                </h2>
+            </div>
+        </div>
+
+        <div id="collectionsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pb-24 px-6">
+        <div class="max-w-7xl mx-auto relative rounded-3xl overflow-hidden h-80 flex items-center px-12">
+            <img src="https://images.unsplash.com/photo-1568475199119-34ce4f1adaf8?q=80&w=2166&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="absolute inset-0 w-full h-full object-cover" alt="CTA" />
+
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+
+            <div class="relative z-10 text-white max-w-lg">
+                <h2 class="text-4xl font-bold mb-4">Start Your Journey Today</h2>
+
+                <p class="mb-8 text-white/80">
+                    Join over 50,000 travelers who found their soul in adventure. Your next
+                    story begins with a single click.
+                </p>
+
+                <button onclick="window.location.href='/html/packages.html'"
+                    class="bg-teal-600 hover:bg-teal-700 px-8 py-3 rounded-full font-bold flex items-center gap-2 transition transform hover:scale-105">
+                    Explore all places
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div>
+                <h3 class="text-xl font-bold mb-4">
+                    <i class="fas fa-globe-americas mr-2"></i>GlobeTrek Adventures
+                </h3>
+                <p class="text-sm text-gray-400 mb-6">
+                    Curating extraordinary journeys for the modern nomad. Sustainable,
+                    authentic, unforgettable.
+                </p>
+
+                <div class="flex gap-4 text-gray-400">
+                    <i class="fab fa-instagram hover:text-white cursor-pointer"></i>
+                    <i class="fab fa-twitter hover:text-white cursor-pointer"></i>
+                    <i class="fab fa-facebook hover:text-white cursor-pointer"></i>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-4">Company</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition">Our Team</a></li>
+                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Partner With Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-4">Resources</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-4">Newsletter</h4>
+                <p class="text-sm text-gray-400 mb-4">
+                    Get weekly inspiration and exclusive deals.
+                </p>
+
+                <div class="flex">
+                    <input type="email" placeholder="Email address"
+                        class="bg-gray-800 border-0 rounded-l-full px-4 py-2 w-full focus:ring-2 focus:ring-teal-500" />
+                    <button class="bg-teal-600 hover:bg-teal-700 px-4 rounded-r-full">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-xs text-gray-500 border-t border-gray-800 pt-8">
+            © 2024 GLOBETREK ADVENTURES. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script type="module" src="/script/home.js"></script>
+</body>
+
+</html>

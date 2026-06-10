@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings | GlobeTrek Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/staff.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>.serif-heading { font-family: 'Playfair Display', serif; }</style>
+</head>
+<body class="font-[Inter] bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Staff Portal</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/staff.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/staff-packages.html" class="nav-link"><i class="fas fa-box w-5"></i> Manage Packages</a>
+            <a href="/html/staff-locations.html" class="nav-link"><i class="fas fa-map-pin w-5"></i> Manage Locations</a>
+            <a href="/html/staff-booking.html" class="nav-link active"><i class="fas fa-calendar-check w-5"></i> Manage Bookings</a>
+            <a href="/html/staff-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Customer Queries</a>
+            <a href="/html/staff-profile.html" class="nav-link"><i class="fas fa-user-circle w-5"></i> Profile</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 serif-heading">Manage Bookings</h2>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 border-l pl-6">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800" id="staffName">Staff</p>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Staff Portal</p>
+                    </div>
+                    <i class="fas fa-user-shield text-3xl text-green-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filter & Search -->
+        <div class="bg-white rounded-2xl p-4 mb-6 shadow-sm border border-gray-100 flex justify-between items-center">
+            <div class="flex gap-3">
+                <select id="statusFilter" class="px-4 py-2 border border-gray-200 rounded-xl text-sm focus:ring-teal-500">
+                    <option value="">All Statuses</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <input type="text" id="searchBooking" placeholder="Search by package or user..."
+                    class="pl-4 pr-4 py-2 border border-gray-200 rounded-xl text-sm w-64 focus:ring-teal-500">
+            </div>
+            <p class="text-sm text-gray-400" id="bookingCount">0 bookings</p>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="text-xs font-semibold uppercase">
+                        <tr>
+                            <th class="pb-4">Package</th>
+                            <th class="pb-4">User Email</th>
+                            <th class="pb-4">Date</th>
+                            <th class="pb-4">Total Price</th>
+                            <th class="pb-4">Status</th>
+                            <th class="pb-4 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody" class="text-sm text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="/script/staff-booking.js"></script>
+</body>
+</html>

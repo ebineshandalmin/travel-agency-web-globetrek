@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Packages | GlobeTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/customer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-[Inter] bg-gray-50 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Customer Console</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/customer.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/customer-bookings.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> My Bookings</a>
+            <a href="/html/customer-packages.html" class="nav-link active"><i class="fas fa-map-marked-alt w-5"></i> Explore Packages</a>
+            <a href="/html/customer-profile.html" class="nav-link"><i class="fas fa-user-circle w-5"></i> My Profile</a>
+            <a href="/html/customer-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Queries</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content (same as before, no changes to filters/grid) -->
+    <main class="flex-1 ml-72 p-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Explore Packages</h2>
+            <!-- Filter Bar (unchanged) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Destination</label>
+                        <div class="relative">
+                            <i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" id="searchInput" placeholder="Where to?"
+                                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Price Range</label>
+                        <select id="priceFilter"
+                            class="w-full pl-4 pr-8 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 appearance-none bg-white">
+                            <option value="all">All Prices</option>
+                            <option value="budget">Under $1,000</option>
+                            <option value="mid">$1,000 - $2,000</option>
+                            <option value="luxury">$2,000+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Tag</label>
+                        <select id="tagFilter"
+                            class="w-full pl-4 pr-8 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 appearance-none bg-white">
+                            <option value="all">All Tags</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Beach">Beach</option>
+                            <option value="City Life">City Life</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Romantic">Romantic</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Historic">Historic</option>
+                            <option value="Relaxing">Relaxing</option>
+                            <option value="Modern">Modern</option>
+                            <option value="Festival">Festival</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="resetFilters"
+                            class="w-full bg-teal-700 hover:bg-teal-800 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                            <i class="fas fa-undo-alt"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading / Error / Empty states -->
+        <div id="loadingIndicator" class="text-center py-12 text-gray-500">
+            <i class="fas fa-spinner fa-spin text-3xl mb-2"></i>
+            <p>Loading packages...</p>
+        </div>
+        <div id="errorMessage" class="hidden text-center py-12 text-red-500">
+            <i class="fas fa-exclamation-circle text-3xl mb-2"></i>
+            <p>Failed to load packages. Please try again later.</p>
+        </div>
+        <div id="noResults" class="hidden text-center py-12 text-gray-400">
+            <i class="fas fa-search text-4xl mb-3"></i>
+            <p class="text-xl">No packages match your filters.</p>
+        </div>
+
+        <div id="packagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <script type="module" src="/script/customer-packages.js"></script>
+</body>
+</html>

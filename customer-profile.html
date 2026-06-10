@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | GlobeTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/customer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-[Inter] bg-gray-50 flex min-h-screen">
+
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col fixed h-full z-30">
+        <div class="p-6 border-b border-gray-100 sidebar-header">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-compass text-2xl"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">GlobeTrek</h1>
+                    <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Customer Console</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <a href="/html/customer.html" class="nav-link"><i class="fas fa-th-large w-5"></i> Dashboard</a>
+            <a href="/html/customer-bookings.html" class="nav-link"><i class="fas fa-calendar-check w-5"></i> My Bookings</a>
+            <a href="/html/customer-packages.html" class="nav-link"><i class="fas fa-map-marked-alt w-5"></i> Explore Packages</a>
+            <a href="/html/customer-profile.html" class="nav-link active"><i class="fas fa-user-circle w-5"></i> My Profile</a>
+            <a href="/html/customer-queries.html" class="nav-link"><i class="fas fa-comment-dots w-5"></i> Queries</a>
+        </nav>
+        <div class="p-4 border-t border-gray-100 space-y-3">
+            <button id="logoutBtn" class="nav-link text-red-500 w-full text-left"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-72 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800" style="font-family:'Playfair Display',serif;">My Profile</h2>
+            <i class="fas fa-user-circle text-3xl text-teal-600"></i>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Profile Details -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Profile Details</h3>
+                <form id="profileForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <p id="view-fullName" class="text-gray-800 font-medium py-2">---</p>
+                        <input type="text" id="fullName" class="hidden w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <p id="view-phone" class="text-gray-800 font-medium py-2">---</p>
+                        <input type="tel" id="phone" class="hidden w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <p id="view-email" class="text-gray-500 py-2">---</p>
+                    </div>
+                    <div id="editActions" class="hidden flex gap-3 pt-4">
+                        <button type="submit" class="bg-teal-700 text-white px-6 py-2 rounded-xl font-bold shadow-md hover:bg-teal-800 transition">Save Changes</button>
+                        <button type="button" id="cancelBtn" class="bg-gray-100 text-gray-600 px-6 py-2 rounded-xl font-bold hover:bg-gray-200 transition">Cancel</button>
+                    </div>
+                    <button type="button" id="editToggleBtn" class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg font-semibold hover:bg-teal-100 transition">
+                        <i class="fas fa-edit mr-2"></i> Edit Profile
+                    </button>
+                </form>
+                <div id="profileMsg" class="mt-4 text-sm font-semibold"></div>
+            </div>
+
+            <!-- Change Password -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Change Password</h3>
+                <form id="passwordForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                        <input type="password" id="newPassword" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <button type="submit" class="bg-teal-700 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:bg-teal-800 transition">
+                        <i class="fas fa-lock mr-2"></i> Update Password
+                    </button>
+                </form>
+                <div id="passwordMsg" class="mt-4 text-sm font-semibold"></div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="/script/customer-profile.js"></script>
+</body>
+</html>
